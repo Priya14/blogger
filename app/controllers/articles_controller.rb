@@ -30,6 +30,13 @@ class ArticlesController < ApplicationController
     flash.notice = "Article '#{@article.title}' Updated!"
     redirect_to article_path(@article)
   end
+  def destroy
+    @article = Article.find(params[:id])
+    @article.destroy
+    respond_to do |format|
+      format.html { redirect_to articles_path }
+    end
+    end
 
   def article_params
     params.require(:article).permit(:title, :body, :tag_list, :image)
